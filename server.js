@@ -14,17 +14,21 @@ app.get('/', (req,res) => {
     res.status(200).send('Hello World')
 })
 
-app.get('/square/:num',validate, (req,res) => {
-    res.status(200).send(req.params.num)
-})
+/*app.get('/square/:num',validate, (req,res) => {
+    res.status(200).send(`{ num : ${req.params.num * req.params.num} }`)
+})*/
 
+
+app.get('/square',validate, (req,res) => {
+    res.status(200).send(`{ num : ${+req.query.num * +req.query.num} }`);
+})
 
 
 
 app.use(errorHandler);
 
 function start(PORT) {
-    app.listen(PORT,() => console.log ('server is wakeup'));
+    app.listen(PORT,() => console.log ('server is started on port', PORT));
 }
 
 module.exports = {
